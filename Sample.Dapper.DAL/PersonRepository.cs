@@ -26,6 +26,16 @@ namespace Sample.Dapper.DAL
 
             return result;
         }
-        
+        public int Insert( string name, string family)
+        {
+            DynamicParameters dynamicParameters = new DynamicParameters();
+            dynamicParameters.Add("name", name);
+            dynamicParameters.Add("family", family);
+            int result = dbConnection.Execute("insert_person", commandType: CommandType.StoredProcedure, param: dynamicParameters);
+            return result;
+
+        }
+
+
     }
 }

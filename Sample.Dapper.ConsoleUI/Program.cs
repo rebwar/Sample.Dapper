@@ -8,8 +8,21 @@ namespace Sample.Dapper.ConsoleUI
     {
         static void Main(string[] args)
         {
+            InsertPerson();
             ShowAllPeople();
-            Updatepeople();
+
+            //Updatepeople();
+        }
+
+        private static void InsertPerson()
+        {
+            var conn = new SqlConnection(@"server=(localdb)\MSSQLLocalDB;initial catalog=DapperSampleDb;integrated security=true");
+            var repo = new PersonRepository(conn);
+            Console.Write("Name:");
+            string name = Console.ReadLine();
+            Console.Write("Family=");
+            string family = Console.ReadLine();
+            int result = repo.Insert(name, family);
         }
 
         private static void Updatepeople()
